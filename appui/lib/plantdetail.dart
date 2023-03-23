@@ -19,7 +19,7 @@ class PlantDetail extends StatelessWidget {
                 child: Container(
                   height: MediaQuery.of(context).size.height / 2,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0),
@@ -40,7 +40,7 @@ class PlantDetail extends StatelessWidget {
                 padding: EdgeInsets.only(left: 25.0, top: 60.0),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                    children: const <Widget>[
                       Text(
                         'INDOOR',
                         style: TextStyle(
@@ -96,7 +96,7 @@ class PlantDetail extends StatelessWidget {
             Positioned(
               top: (MediaQuery.of(context).size.height / 2) - 185.0,
               left: (MediaQuery.of(context).size.width / 2) - 110.0,
-              child: Image(
+              child: const Image(
                 image: AssetImage('assets/aloevera.png'),
                 fit: BoxFit.cover,
                 height: 250.0,
@@ -109,7 +109,7 @@ class PlantDetail extends StatelessWidget {
                     right: 15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       'All to know...',
                       style: TextStyle(

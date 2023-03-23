@@ -1,3 +1,4 @@
+import 'package:appui/cameragallery.dart';
 import 'package:appui/plantdetail.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -31,7 +32,7 @@ class _PlantListState extends State<PlantList> {
 
   changeDescription() {
     var value = _scrollController.offset.round();
-    var descIndex = (value / 195).round();
+    var descIndex = (value / 200).round();
     print(value);
     setState(() {
       description = descriptions[descIndex];
@@ -81,8 +82,9 @@ class _PlantListState extends State<PlantList> {
                   fontSize: 17.0,
                   fontWeight: FontWeight.w300),
             )),
+        SizedBox(height: 10.0),
         Padding(
-            padding: EdgeInsets.only(left: 170.0, top: 5.0, right: 170.0),
+            padding: EdgeInsets.only(left: 170.0, right: 170.0),
             child: Container(
                 height: 52.0,
                 width: 20.0,
@@ -92,7 +94,8 @@ class _PlantListState extends State<PlantList> {
                 ),
                 child: InkWell(
                   onTap: () {
-                    //Navigator.of(context).push()
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CameraGallery()));
                   },
                   child: Container(
                     height: 10.0,
@@ -163,7 +166,7 @@ class _PlantListState extends State<PlantList> {
                                   fontFamily: 'Montserrat',
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF8AC7A4)), // TextStyle
+                                  color: Color(0xFF8AC7A4)), 
                             ),
                             Text(
                               plantName,
@@ -171,8 +174,8 @@ class _PlantListState extends State<PlantList> {
                                   fontFamily: 'Montserrat',
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.white), // TextStyle
-                            ),
+                                  color: Colors.white),                            
+                                ),
                           ])
                     ],
                   ),
@@ -263,11 +266,11 @@ class _PlantListState extends State<PlantList> {
                 child: Container(
                   height: 30.0,
                   width: 30.0,
-                  child: Icon(Icons.info_outline_rounded,
+                  child: const Icon(Icons.info_outline_rounded,
                       color: Colors.white, size: 30.0),
                 ),
               ))),
-      SizedBox(width: 20.0),
+      const SizedBox(width: 20.0),
     ]);
   }
 }

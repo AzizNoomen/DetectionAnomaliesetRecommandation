@@ -1,6 +1,8 @@
 import 'package:appui/plantlist.dart';
 import 'package:flutter/material.dart';
 
+import 'cameragallery.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -47,6 +49,39 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
+/*class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: ListView(children: <Widget>[
+      const SizedBox(height: 15.0),
+      Padding(
+          padding: EdgeInsets.only(left: 170.0, right: 170.0),
+          child: Container(
+              height: 52.0,
+              width: 20.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25.0),
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CameraGallery()));
+                },
+                child: Container(
+                  height: 10.0,
+                  width: 10.0,
+                  child: Icon(Icons.add,
+                      color: Color.fromARGB(255, 255, 255, 255), size: 30.0),
+                ),
+              ))),
+    ]));
+  }
+}*/
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
@@ -138,21 +173,34 @@ class _MyHomePageState extends State<MyHomePage>
               PlantList(),
               PlantList(),
               PlantList(),
-              PlantList()
+              PlantList(),
             ],
           ),
         ),
         Row(children: <Widget>[
-          InkWell(
-            onTap: () {},
-            child: Container(
-              height: 30.0,
-              width: 30.0,
-              decoration: BoxDecoration(color: Color(0xFF399D63)),
-              child: Icon(Icons.help_outline, color: Colors.black, size: 30.0),
-            ),
-          )
-        ])
+          Padding(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Container(
+                  height: 52.0,
+                  width: 200.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CameraGallery()));
+                    },
+                    child: Container(
+                      height: 10.0,
+                      width: 10.0,
+                      child: Icon(Icons.add,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          size: 30.0),
+                    ),
+                  ))),
+        ]),
       ]),
     );
   }
