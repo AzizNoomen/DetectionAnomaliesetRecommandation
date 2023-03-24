@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:appui/recommendation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,7 +11,7 @@ class CameraGallery extends StatefulWidget {
 class _CameraGalleryState extends State<CameraGallery> {
   File? _image;
   final picker = ImagePicker();
-  final _textController = TextEditingController();
+  bool _loading = true;
 
   pickImage() async {
     var image = await picker.getImage(source: ImageSource.gallery);
@@ -20,6 +21,7 @@ class _CameraGalleryState extends State<CameraGallery> {
 
     setState(() {
       _image = File(image.path);
+      _loading = false;
     });
   }
 
@@ -37,10 +39,62 @@ class _CameraGalleryState extends State<CameraGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back,
+                      color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.8)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )),
+            SizedBox(height: 20.0),
+            Center(
+                child: _loading
+                    ? Container(
+                        child: Column(
+                        children: const <Widget>[
+                          SizedBox(height: 180.0),
+                          Text(
+                            "The selected image",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontFamily: 'Montserrat',
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Text(
+                            "will be shown here.",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontFamily: 'Montserrat',
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 60.0,
+                          ),
+                        ],
+                      ))
+                    : Container(
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.file(_image!,
+                                width: 300, height: 300, fit: BoxFit.cover))
+// Image. network
+// CliDRRect
+                        )),
+            const SizedBox(height: 40.0),
             GestureDetector(
               onTap: takePhoto,
               child: Container(
@@ -53,7 +107,7 @@ class _CameraGalleryState extends State<CameraGallery> {
                   child: const Text(
                     "Take a photo",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontFamily: 'Montserrat',
                       fontSize: 20.0,
                       fontWeight: FontWeight.w400,
@@ -73,7 +127,7 @@ class _CameraGalleryState extends State<CameraGallery> {
                   child: const Text(
                     "Open Gallery",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontFamily: 'Montserrat',
                       fontSize: 20.0,
                       fontWeight: FontWeight.w400,
@@ -81,20 +135,31 @@ class _CameraGalleryState extends State<CameraGallery> {
                   )),
             ),
             const SizedBox(
-              height: 25.0,
+              height: 80.0,
             ),
-            TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: "enter your location",
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                    onPressed: () {
-                      _textController.clear();
-                    },
-                    icon: const Icon(Icons.clear)),
-              ),
-            )
+            Padding(
+                padding: EdgeInsets.only(left: 90.0, top: 10.0, right: 90.0),
+                child: !_loading
+                    ? Container(
+                        height: 60.0,
+                        width: 60.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.0),
+                          color: Colors.black,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Recommendation()));
+                          },
+                          child: Container(
+                            height: 40.0,
+                            width: 40.0,
+                            child: const Icon(Icons.arrow_forward_outlined,
+                                color: Colors.white, size: 30.0),
+                          ),
+                        ))
+                    : Container()),
           ],
         ),
       ),
